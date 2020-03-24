@@ -8,3 +8,7 @@
 [komentorivi.txt](https://github.com/glinoen/ot-harjoitustyo2020/blob/master/laskarit/viikko1/komentorivi.txt)
 
 
+
+## Dokumentaatio
+
+[Vaatimusmäärittely](https://github.com/glinoen/ot-harjoitustyo2020/blob/master/dokumentaatio/vaatimusmaarittely.md)
