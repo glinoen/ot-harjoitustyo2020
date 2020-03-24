@@ -11,4 +11,4 @@
 
 ## Dokumentaatio
 
-[Vaatimusmäärittely](https://github.com/glinoen/ot-harjoitustyo2020/blob/master/dokumentaatio/vaatimusmaarittely.md)
+[Vaatimusmäärittely](https://github.com/glinoen/ot-harjoitustyo2020/blob/master/dokumentointi/vaatimusmaarittely.md)
