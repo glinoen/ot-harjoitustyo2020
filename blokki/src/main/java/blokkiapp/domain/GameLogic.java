@@ -25,7 +25,7 @@ public class GameLogic {
     }
     
     public void moveTiles(String direction) {
-        if(direction.equals("down")) {
+        if (direction.equals("down")) {
             lauta.moveDown();
         } else if (direction.equals("right")) {
             lauta.moveRight();

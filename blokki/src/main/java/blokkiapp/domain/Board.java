@@ -12,84 +12,84 @@ package blokkiapp.domain;
 import java.util.*;
 
 public class Board {
-    public final int BOARD_SIZE;
-    public final int LOWEST_NUMBER;
-    public final int STARTING_TILES;
+    public final int boardSize;
+    public final int lowestNumber;
+    public final int startingTiles;
     
     private Tile[][] grid;
     
     private Random random = new Random();
     
     public Board(int boardSize, int lowestNumber, int startingTiles) {
-        this.BOARD_SIZE = boardSize;
-        this.LOWEST_NUMBER = lowestNumber;
-        this.STARTING_TILES = startingTiles;
+        this.boardSize = boardSize;
+        this.lowestNumber = lowestNumber;
+        this.startingTiles = startingTiles;
         this.grid = new Tile[boardSize][boardSize];
     }
     
     public Board() {
-        this(4,2,2);
+        this(4, 2, 2);
     }
     
     public Board(int boardSize) {
-        this(boardSize,2,2);
+        this(boardSize, 2, 2);
     }
     
     public Board(int boardSize, int lowestNumber) {
-        this(boardSize,lowestNumber,2);
+        this(boardSize, lowestNumber, 2);
     }
     
     public void gridInit() {
-        for(int i=0; i<BOARD_SIZE; i++) {
-            for(int j=0; j<BOARD_SIZE; j++) {
-                grid[i][j] = new Tile(i,j);
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
+                grid[i][j] = new Tile(i, j);
             }
         }
     }
     
     public void gridResetMerge() {
-        for(int i=0; i<BOARD_SIZE; i++) {
-            for(int j=0; j<BOARD_SIZE; j++) {
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
                 grid[i][j].setMerged(false);
             }
         }
     }
     
     public void addRandomTile() {
-        while(true) {
-            int randomX = random.nextInt(BOARD_SIZE);
-            int randomY = random.nextInt(BOARD_SIZE);
-            if(grid[randomX][randomY].getValue() == 0) {
+        while (true) {
+            int randomX = random.nextInt(boardSize);
+            int randomY = random.nextInt(boardSize);
+            if (grid[randomX][randomY].getValue() == 0) {
                 int tmp = random.nextInt(2) + 1;
-                grid[randomX][randomY].setValue(tmp * LOWEST_NUMBER);
+                grid[randomX][randomY].setValue(tmp * lowestNumber);
                 break;
             }
         }
     }
     
     public void tileMoverOrMerger(int s, Tile tile, Tile comparedTile) {
-        if(s % 2 != 0 && comparedTile.getValue() == 0) {
+        if (s % 2 != 0 && comparedTile.getValue() == 0) {
             comparedTile.setValue(tile.getValue());
             tile.setValue(0);
-        } else if(s % 2 == 0 && tile.getValue() == comparedTile.getValue() && !comparedTile.isMerged() && !tile.isMerged()) {
-            comparedTile.setValue(tile.getValue()*2);
+        } else if (s % 2 == 0 && tile.getValue() == comparedTile.getValue() && !comparedTile.isMerged() && !tile.isMerged()) {
+            comparedTile.setValue(tile.getValue() * 2);
             comparedTile.setMerged(true);
             tile.setValue(0);
         }
     }
     
     public void moveDown() {
-        for(int s = 1; s<4; s++) {
-            for(int b=BOARD_SIZE-2;b>=0; b--) {
-                for(int i=0;i<BOARD_SIZE; i++) {
-                    for(int j=b;j<BOARD_SIZE; j++) {
+        for (int s = 1; s < 4; s++) {
+            for (int b = boardSize - 2; b >= 0; b--) {
+                for (int i = 0; i < boardSize; i++) {
+                    for (int j = b; j < boardSize; j++) {
                         Tile tile = grid[j][i];
-                        if(tile.getValue() == 0) {
+                        if (tile.getValue() == 0) {
                             ;
                         } else {
-                            if(j + 1 < BOARD_SIZE) {
-                                Tile comparedTile = grid[j+1][i];
-                                tileMoverOrMerger(s,tile,comparedTile);
+                            if (j + 1 < boardSize) {
+                                Tile comparedTile = grid[j + 1][i];
+                                tileMoverOrMerger(s, tile, comparedTile);
                             }
                         }
                     }
@@ -99,17 +99,17 @@ public class Board {
     }
 
     public void moveRight() {
-        for(int s = 1; s<4; s++) {
-            for(int b=BOARD_SIZE-2;b>=0; b--) {
-                for(int i=0;i<BOARD_SIZE; i++) {
-                    for(int j=b;j<BOARD_SIZE; j++) {
+        for (int s = 1; s < 4; s++) {
+            for (int b = boardSize - 2; b >= 0; b--) {
+                for (int i = 0; i < boardSize; i++) {
+                    for (int j = b; j < boardSize; j++) {
                         Tile tile = grid[i][j];
-                        if(tile.getValue() == 0) {
+                        if (tile.getValue() == 0) {
                             ;
                         } else {
-                            if(j + 1 < BOARD_SIZE) {
-                                Tile comparedTile = grid[i][j+1];
-                                tileMoverOrMerger(s,tile,comparedTile);
+                            if (j + 1 < boardSize) {
+                                Tile comparedTile = grid[i][j + 1];
+                                tileMoverOrMerger(s, tile, comparedTile);
                             }
                         }
                     }
@@ -119,17 +119,17 @@ public class Board {
     }
     
     public void moveUp() {
-        for(int s = 1; s<4; s++) {
-            for(int b = 1; b<BOARD_SIZE; b++) {
-                for(int i=0;i<BOARD_SIZE; i++) {
-                    for(int j=b;j>=0; j--) {
+        for (int s = 1; s < 4; s++) {
+            for (int b = 1; b < boardSize; b++) {
+                for (int i = 0; i < boardSize; i++) {
+                    for (int j = b; j >= 0; j--) {
                         Tile tile = grid[j][i];
-                        if(tile.getValue() == 0) {
+                        if (tile.getValue() == 0) {
                             ;
                         } else {
-                            if(j - 1 >= 0) {
-                                Tile comparedTile = grid[j-1][i];
-                                tileMoverOrMerger(s,tile,comparedTile);
+                            if (j - 1 >= 0) {
+                                Tile comparedTile = grid[j - 1][i];
+                                tileMoverOrMerger(s, tile, comparedTile);
                             }
                         }
                     }
@@ -139,17 +139,17 @@ public class Board {
     }
     
     public void moveLeft() {
-        for(int s = 1; s<4; s++) {
-            for(int b = 1; b<BOARD_SIZE; b++) {
-                for(int i=0;i<BOARD_SIZE; i++) {
-                    for(int j=b;j>=0; j--) {
+        for (int s = 1; s < 4; s++) {
+            for (int b = 1; b < boardSize; b++) {
+                for (int i = 0; i < boardSize; i++) {
+                    for (int j = b; j >= 0; j--) {
                         Tile tile = grid[i][j];
-                        if(tile.getValue() == 0) {
+                        if (tile.getValue() == 0) {
                             ;
                         } else {
-                            if(j - 1 >= 0) {
-                                Tile comparedTile = grid[i][j-1];
-                                tileMoverOrMerger(s,tile,comparedTile);
+                            if (j - 1 >= 0) {
+                                Tile comparedTile = grid[i][j - 1];
+                                tileMoverOrMerger(s, tile, comparedTile);
                             }
                         }
                     }
@@ -162,25 +162,27 @@ public class Board {
 
     public  void printGrid() {
         Arrays.stream(grid)
-        .forEach(
-            (row) -> {
-                System.out.print("[");
-                Arrays.stream(row)
-                .forEach((el) -> System.out.print(" " + el.getValue()+ " "));
-                System.out.println("]");
-            }
-        );
+            .forEach(
+                (row) -> {
+                    System.out.print("[");
+                    Arrays.stream(row)
+                        .forEach((tile) -> System.out.print(" " + tile.getValue() + " "));
+                    System.out.println("]");
+                }
+            );
         System.out.println("");
+    }
+
+    public Tile[][] getGrid() {
+        return grid;
+    }
+
+    public void setGrid(Tile[][] grid) {
+        this.grid = grid;
     }
     
     
-//    public int[][] getGrid() {
-//        return grid;
-//    }
-//
-//    public void setGrid(int[][] grid) {
-//        this.grid = grid;
-//    }
+
 
     public Random getRandom() {
         return random;
