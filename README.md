@@ -11,7 +11,7 @@
 
 ## Projektin ajaminen
 
-kansiossa /blokki/ , komennolla
+kansiossa blokki, komennolla
 
 ```
 mvn compile exec:java -Dexec.mainClass=blokkiapp.Main

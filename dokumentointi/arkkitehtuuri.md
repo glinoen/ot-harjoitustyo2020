@@ -2,4 +2,4 @@
 
 ## Sovelluslogiikka
 
-[pakkauskaavio] (kuvat/pakkauskaavio.png)
+![pakkauskaavio] (/kuvat/pakkauskaavio.png)
