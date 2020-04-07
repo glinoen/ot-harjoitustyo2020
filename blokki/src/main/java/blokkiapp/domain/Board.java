@@ -16,15 +16,15 @@ public class Board {
     public final int LOWEST_NUMBER;
     public final int STARTING_TILES;
     
-    private int[][] grid;
+    private Tile[][] grid;
     
-    
+    private Random random = new Random();
     
     public Board(int boardSize, int lowestNumber, int startingTiles) {
         this.BOARD_SIZE = boardSize;
         this.LOWEST_NUMBER = lowestNumber;
         this.STARTING_TILES = startingTiles;
-        this.grid = new int[boardSize][boardSize];
+        this.grid = new Tile[boardSize][boardSize];
     }
     
     public Board() {
@@ -34,4 +34,184 @@ public class Board {
     public Board(int boardSize) {
         this(boardSize,2,2);
     }
+    
+    public Board(int boardSize, int lowestNumber) {
+        this(boardSize,lowestNumber,2);
+    }
+    
+    public void gridInit() {
+        for(int i=0; i<BOARD_SIZE; i++) {
+            for(int j=0; j<BOARD_SIZE; j++) {
+                grid[i][j] = new Tile(i,j);
+            }
+        }
+//        grid[0][0].setValue(2);
+//        grid[0][1].setValue(2);
+//        grid[0][2].setValue(2);
+//        grid[0][3].setValue(2);
+    }
+    
+    public void gridResetMerge() {
+        for(int i=0; i<BOARD_SIZE; i++) {
+            for(int j=0; j<BOARD_SIZE; j++) {
+                grid[i][j].setMerged(false);
+            }
+        }
+    }
+    
+    public void addRandomTile() {
+        while(true) {
+            int randomX = random.nextInt(BOARD_SIZE);
+            int randomY = random.nextInt(BOARD_SIZE);
+            if(grid[randomX][randomY].getValue() == 0) {
+                int tmp = random.nextInt(2) + 1;
+                grid[randomX][randomY].setValue(tmp * LOWEST_NUMBER);
+                break;
+            }
+        }
+    }
+    
+    public void moveDown() {
+        for(int s = 1; s<4; s++) {
+            for(int b=BOARD_SIZE-2;b>=0; b--) {
+                for(int i=0;i<BOARD_SIZE; i++) {
+                    for(int j=b;j<BOARD_SIZE; j++) {
+                        Tile tile = grid[j][i];
+                        if(tile.getValue() == 0) {
+                            ;
+                        } else {
+                            if(j + 1 < BOARD_SIZE) {
+                                Tile comparedTile = grid[j+1][i];
+                                if(s % 2 != 0 && comparedTile.getValue() == 0) {
+                                    comparedTile.setValue(tile.getValue());
+                                    tile.setValue(0);
+                                    
+                                } else if(s % 2 == 0 && tile.getValue() == comparedTile.getValue() && !comparedTile.isMerged() && !tile.isMerged()) {
+                                    comparedTile.setValue(tile.getValue()*2);
+                                    comparedTile.setMerged(true);
+                                    tile.setValue(0);
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } 
+    }
+
+    public void moveRight() {
+        for(int s = 1; s<4; s++) {
+            for(int b=BOARD_SIZE-2;b>=0; b--) {
+                for(int i=0;i<BOARD_SIZE; i++) {
+                    for(int j=b;j<BOARD_SIZE; j++) {
+                        Tile tile = grid[i][j];
+                        if(tile.getValue() == 0) {
+                            ;
+                        } else {
+                            if(j + 1 < BOARD_SIZE) {
+                                Tile comparedTile = grid[i][j+1];
+                                if(s % 2 != 0 && comparedTile.getValue() == 0) {
+                                    comparedTile.setValue(tile.getValue());
+                                    tile.setValue(0);
+                                } else if(s % 2 == 0 && tile.getValue() == comparedTile.getValue() && !comparedTile.isMerged() && !tile.isMerged()) {
+                                    comparedTile.setValue(tile.getValue()*2);
+                                    comparedTile.setMerged(true);
+                                    tile.setValue(0);    
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } 
+    }
+    
+    public void moveUp() {
+        for(int s = 1; s<4; s++) {
+            for(int b = 1; b<BOARD_SIZE; b++) {
+                for(int i=0;i<BOARD_SIZE; i++) {
+                    for(int j=b;j>=0; j--) {
+                        Tile tile = grid[j][i];
+                        if(tile.getValue() == 0) {
+                            ;
+                        } else {
+                            if(j - 1 >= 0) {
+                                Tile comparedTile = grid[j-1][i];
+                                if(s % 2 != 0 && comparedTile.getValue() == 0) {
+                                    comparedTile.setValue(tile.getValue());
+                                    tile.setValue(0);
+                                } else if(s % 2 == 0 && tile.getValue() == comparedTile.getValue() && !comparedTile.isMerged() && !tile.isMerged()) {
+                                    comparedTile.setValue(tile.getValue()*2);
+                                    comparedTile.setMerged(true);
+                                    tile.setValue(0);    
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }    
+    }
+    
+    public void moveLeft() {
+        for(int s = 1; s<4; s++) {
+            for(int b = 1; b<BOARD_SIZE; b++) {
+                for(int i=0;i<BOARD_SIZE; i++) {
+                    for(int j=b;j>=0; j--) {
+                        Tile tile = grid[i][j];
+                        if(tile.getValue() == 0) {
+                            ;
+                        } else {
+                            if(j - 1 >= 0) {
+                                Tile comparedTile = grid[i][j-1];
+                                if(s % 2 != 0 && comparedTile.getValue() == 0) {
+                                    comparedTile.setValue(tile.getValue());
+                                    tile.setValue(0);
+                                } else if(s % 2 == 0 && tile.getValue() == comparedTile.getValue() && !comparedTile.isMerged() && !tile.isMerged()) {
+                                    comparedTile.setValue(tile.getValue()*2);
+                                    comparedTile.setMerged(true);
+                                    tile.setValue(0);    
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }    
+    }
+    
+
+
+    public  void printGrid() {
+        Arrays.stream(grid)
+        .forEach(
+            (row) -> {
+                System.out.print("[");
+                Arrays.stream(row)
+                .forEach((el) -> System.out.print(" " + el.getValue()+ " "));
+                System.out.println("]");
+            }
+        );
+        System.out.println("");
+    }
+    
+    
+//    public int[][] getGrid() {
+//        return grid;
+//    }
+//
+//    public void setGrid(int[][] grid) {
+//        this.grid = grid;
+//    }
+
+    public Random getRandom() {
+        return random;
+    }
+
+    public void setRandom(Random random) {
+        this.random = random;
+    }
+    
+    
 }
