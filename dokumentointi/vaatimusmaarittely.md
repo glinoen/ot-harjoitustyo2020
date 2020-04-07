@@ -12,6 +12,10 @@ Yksi käyttäjärooli.
 
 Sovelluksessa on aloitusnäkymä missä valitaan pelin asetukset. Toinen näkymä on itse pelinäkymä.
 
+## Toteutuneet ominaisuudet
+
+- peliä voi pelata tekstimuotoisena ilman pisteitä
+
 ## Perusversion tarjoama toiminnallisuus
 
 - käyttäjä voi valita pelin asetukset
