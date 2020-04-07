@@ -31,4 +31,33 @@ public class BoardTest {
     public void boardHasTheRightGridSize() {
         assertEquals(4, board.getGrid().length);
     }
+    
+    @Test
+    public void gridInitalizationWorks() {
+        int gridvalue = 0;
+        board.gridInit();
+        Tile[][] grid = board.getGrid();
+        for (int i = 0; i < board.boardSize; i++) { 
+            for (int j = 0; j < board.boardSize; j++) { 
+                gridvalue += grid[i][j].getValue();
+            }
+        }
+        assertEquals(0, gridvalue);
+    }
+    
+    @Test
+    public void addingOfRandomTileAddsATile() { 
+        int gridvalue = 0;
+        board.gridInit();
+        board.addRandomTile();
+        Tile[][] grid = board.getGrid();
+        for (int i = 0; i < board.boardSize; i++) { 
+            for (int j = 0; j < board.boardSize; j++) { 
+                if (grid[i][j].getValue() > 0) { 
+                    gridvalue++;
+                }
+            }
+        }
+        assertEquals(1, gridvalue);
+    }
 }

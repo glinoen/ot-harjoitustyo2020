@@ -24,7 +24,7 @@ public class TextUi {
     
     public void start() {
         logic.newGame(4);
-        logic.getLauta().printGrid();
+        logic.getBoard().printGrid();
         System.out.println("wasd+enter to move grid, type end to quit");
         while (true) {
             String row = reader.nextLine();
@@ -39,7 +39,7 @@ public class TextUi {
             } else if (row.equals("d")) { 
                 logic.moveTiles("right");
             }
-            logic.getLauta().printGrid();
+            logic.getBoard().printGrid();
         }  
     }
 }

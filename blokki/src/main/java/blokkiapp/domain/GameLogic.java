@@ -11,31 +11,31 @@ package blokkiapp.domain;
  */
 public class GameLogic {
     private int score;
-    private Board lauta;
+    private Board board;
     
     public GameLogic() {
         this.score = 0;
     }
     
     public void newGame(int size) {
-        this.lauta = new Board(size);
-        lauta.gridInit();
-        lauta.addRandomTile();
-        lauta.addRandomTile();
+        this.board = new Board(size);
+        board.gridInit();
+        board.addRandomTile();
+        board.addRandomTile();
     }
     
     public void moveTiles(String direction) {
         if (direction.equals("down")) {
-            lauta.moveDown();
+            board.moveDown();
         } else if (direction.equals("right")) {
-            lauta.moveRight();
+            board.moveRight();
         } else if (direction.equals("left")) {
-            lauta.moveLeft();
+            board.moveLeft();
         } else if (direction.equals("up")) {
-            lauta.moveUp();
+            board.moveUp();
         }
-        lauta.addRandomTile();
-        lauta.gridResetMerge();
+        board.addRandomTile();
+        board.gridResetMerge();
     }
 
     public int getScore() {
@@ -46,12 +46,12 @@ public class GameLogic {
         this.score = score;
     }
 
-    public Board getLauta() {
-        return lauta;
+    public Board getBoard() {
+        return board;
     }
 
-    public void setLauta(Board lauta) {
-        this.lauta = lauta;
+    public void setBoard(Board board) {
+        this.board = board;
     }
     
 }
