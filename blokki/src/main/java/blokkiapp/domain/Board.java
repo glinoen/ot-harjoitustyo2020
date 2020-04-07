@@ -45,10 +45,6 @@ public class Board {
                 grid[i][j] = new Tile(i,j);
             }
         }
-//        grid[0][0].setValue(2);
-//        grid[0][1].setValue(2);
-//        grid[0][2].setValue(2);
-//        grid[0][3].setValue(2);
     }
     
     public void gridResetMerge() {
@@ -71,6 +67,17 @@ public class Board {
         }
     }
     
+    public void tileMoverOrMerger(int s, Tile tile, Tile comparedTile) {
+        if(s % 2 != 0 && comparedTile.getValue() == 0) {
+            comparedTile.setValue(tile.getValue());
+            tile.setValue(0);
+        } else if(s % 2 == 0 && tile.getValue() == comparedTile.getValue() && !comparedTile.isMerged() && !tile.isMerged()) {
+            comparedTile.setValue(tile.getValue()*2);
+            comparedTile.setMerged(true);
+            tile.setValue(0);
+        }
+    }
+    
     public void moveDown() {
         for(int s = 1; s<4; s++) {
             for(int b=BOARD_SIZE-2;b>=0; b--) {
@@ -82,16 +89,7 @@ public class Board {
                         } else {
                             if(j + 1 < BOARD_SIZE) {
                                 Tile comparedTile = grid[j+1][i];
-                                if(s % 2 != 0 && comparedTile.getValue() == 0) {
-                                    comparedTile.setValue(tile.getValue());
-                                    tile.setValue(0);
-                                    
-                                } else if(s % 2 == 0 && tile.getValue() == comparedTile.getValue() && !comparedTile.isMerged() && !tile.isMerged()) {
-                                    comparedTile.setValue(tile.getValue()*2);
-                                    comparedTile.setMerged(true);
-                                    tile.setValue(0);
-                                    
-                                }
+                                tileMoverOrMerger(s,tile,comparedTile);
                             }
                         }
                     }
@@ -111,14 +109,7 @@ public class Board {
                         } else {
                             if(j + 1 < BOARD_SIZE) {
                                 Tile comparedTile = grid[i][j+1];
-                                if(s % 2 != 0 && comparedTile.getValue() == 0) {
-                                    comparedTile.setValue(tile.getValue());
-                                    tile.setValue(0);
-                                } else if(s % 2 == 0 && tile.getValue() == comparedTile.getValue() && !comparedTile.isMerged() && !tile.isMerged()) {
-                                    comparedTile.setValue(tile.getValue()*2);
-                                    comparedTile.setMerged(true);
-                                    tile.setValue(0);    
-                                }
+                                tileMoverOrMerger(s,tile,comparedTile);
                             }
                         }
                     }
@@ -138,14 +129,7 @@ public class Board {
                         } else {
                             if(j - 1 >= 0) {
                                 Tile comparedTile = grid[j-1][i];
-                                if(s % 2 != 0 && comparedTile.getValue() == 0) {
-                                    comparedTile.setValue(tile.getValue());
-                                    tile.setValue(0);
-                                } else if(s % 2 == 0 && tile.getValue() == comparedTile.getValue() && !comparedTile.isMerged() && !tile.isMerged()) {
-                                    comparedTile.setValue(tile.getValue()*2);
-                                    comparedTile.setMerged(true);
-                                    tile.setValue(0);    
-                                }
+                                tileMoverOrMerger(s,tile,comparedTile);
                             }
                         }
                     }
@@ -165,14 +149,7 @@ public class Board {
                         } else {
                             if(j - 1 >= 0) {
                                 Tile comparedTile = grid[i][j-1];
-                                if(s % 2 != 0 && comparedTile.getValue() == 0) {
-                                    comparedTile.setValue(tile.getValue());
-                                    tile.setValue(0);
-                                } else if(s % 2 == 0 && tile.getValue() == comparedTile.getValue() && !comparedTile.isMerged() && !tile.isMerged()) {
-                                    comparedTile.setValue(tile.getValue()*2);
-                                    comparedTile.setMerged(true);
-                                    tile.setValue(0);    
-                                }
+                                tileMoverOrMerger(s,tile,comparedTile);
                             }
                         }
                     }

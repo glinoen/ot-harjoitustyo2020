@@ -23,7 +23,7 @@ public class Main {
         omalauta[0][3] = 2;
         
         GameLogic logiik = new GameLogic();
-        logiik.newGame(10);
+        logiik.newGame(5);
         logiik.getLauta().printGrid();
         logiik.moveTiles("right");
         logiik.getLauta().printGrid();
