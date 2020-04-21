@@ -12,13 +12,24 @@ package blokkiapp.domain;
 public class GameLogic {
     private int score;
     private Board board;
+    private boolean gameOver;
     
     public GameLogic() {
-        this.score = 0;
+        
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
     }
     
     public void newGame(int size) {
         this.board = new Board(size);
+        this.gameOver = false;
+        this.score = 0;
         board.gridInit();
         board.addRandomTile();
         board.addRandomTile();
@@ -34,8 +45,13 @@ public class GameLogic {
         } else if (direction.equals("up")) {
             board.moveUp();
         }
-        board.addRandomTile();
-        board.gridResetMerge();
+        int roundScore = board.gridCountScoreAndResetMerge();
+        if ( roundScore == -1 ) { 
+            this.gameOver = true;
+        } else { 
+            this.score += roundScore;
+            board.addRandomTile();
+        }
     }
 
     public int getScore() {

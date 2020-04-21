@@ -40,6 +40,7 @@ public class TextUi {
                 logic.moveTiles("right");
             }
             logic.getBoard().printGrid();
+            System.out.println("score: " + logic.getScore());
         }  
     }
 }

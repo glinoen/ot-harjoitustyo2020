@@ -47,11 +47,25 @@ public class Board {
         }
     }
     
-    public void gridResetMerge() {
+    public int gridCountScoreAndResetMerge() {
+        boolean full = true;
+        int score = 0;
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
-                grid[i][j].setMerged(false);
+                Tile currentTile = grid[i][j];
+                if (currentTile.getValue() == 0) {
+                    full = false;
+                }
+                if (currentTile.isMerged()) {
+                    score += currentTile.getValue();
+                    currentTile.setMerged(false);
+                }
             }
+        }
+        if (full) { 
+            return -1;
+        } else { 
+            return score;
         }
     }
     
