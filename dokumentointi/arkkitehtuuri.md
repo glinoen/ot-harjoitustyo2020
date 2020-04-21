@@ -11,4 +11,4 @@
 
 Kun käyttäjä pelaa peliä ja painaa nuolinäppäintä ylös tapahtuu seuraavaa:
 
-![alt text](/kuvat/sekvenssitile.png)
+![alt text](/dokumentointi/kuvat/sekvenssitile.png)
