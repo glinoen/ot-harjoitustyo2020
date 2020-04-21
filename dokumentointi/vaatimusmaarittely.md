@@ -15,6 +15,10 @@ Sovelluksessa on aloitusnäkymä missä valitaan pelin asetukset. Toinen näkym�
 ## Toteutuneet ominaisuudet
 
 - peliä voi pelata tekstimuotoisena ilman pisteitä
+- graafinen käyttöliittymä
+- ruudukon koko voidaan valita
+- pisteitä saadaan ruutujen yhdistyessä
+- peli loppuu kun ruudukkoon ei voi enää lisätä uutta ruutua
 
 ## Perusversion tarjoama toiminnallisuus
 

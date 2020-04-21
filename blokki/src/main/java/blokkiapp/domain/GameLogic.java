@@ -46,7 +46,7 @@ public class GameLogic {
             board.moveUp();
         }
         int roundScore = board.gridCountScoreAndResetMerge();
-        if ( roundScore == -1 ) { 
+        if (roundScore == -1) { 
             this.gameOver = true;
         } else { 
             this.score += roundScore;

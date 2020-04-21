@@ -6,4 +6,6 @@
 | 31.3. | 4    | projektin aloitus |
 | 6.4	| 4    | Board luokan ja pelilogiikan tekemistä |
 | 7.4   | 5    | Board luokan ja pelilogiikan tekemistä, testien ja checkstylen lisäys sekä lisää dokumentointia|
-| yht   | 17   | | 
+| 20.4  | 6    | graafisen käyttöliittymän aloittaminen|
+| 21.4  | 4    | viikon 5 vaatimuksia, alustava graafinen käyttöliittymä|
+| yht   | 27   | | 
