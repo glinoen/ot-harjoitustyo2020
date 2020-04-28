@@ -13,6 +13,7 @@ public class GameLogic {
     private int score;
     private Board board;
     private boolean gameOver;
+    private boolean gameWon;
     
     public GameLogic() {
         
@@ -26,9 +27,14 @@ public class GameLogic {
         this.gameOver = gameOver;
     }
     
+    public boolean isGameWon() {
+        return gameWon;
+    }
+    
     public void newGame(int size) {
         this.board = new Board(size);
         this.gameOver = false;
+        this.gameWon = false;
         this.score = 0;
         board.gridInit();
         board.addRandomTile();
@@ -50,7 +56,11 @@ public class GameLogic {
             this.gameOver = true;
         } else { 
             this.score += roundScore;
-            board.addRandomTile();
+            if (board.isGameWon() ) {
+                this.gameWon = true;
+            } else { 
+                board.addRandomTile();
+            }
         }
     }
 

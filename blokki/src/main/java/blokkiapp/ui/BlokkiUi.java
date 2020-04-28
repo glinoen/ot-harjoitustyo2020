@@ -6,6 +6,10 @@
 package blokkiapp.ui;
 
 import blokkiapp.domain.GameLogic;
+import blokkiapp.domain.ScoreService;
+import blokkiapp.domain.Score;
+import blokkiapp.dao.DatabaseScoreDao;
+import java.util.ArrayList;
 import java.util.Optional;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -19,7 +23,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
@@ -38,15 +45,21 @@ import javafx.stage.Stage;
  */
 public class BlokkiUi extends Application{
     private GameLogic logic;
+    private ScoreService scoreService;
     private Stage stage;
     private int gridSize;
     
     private Scene gameSetupScene;
     private Scene mainScene;
+    private Scene winScene;
+    private Scene scoreScene;
     
     @Override
     public void init() throws Exception { 
         logic = new GameLogic();
+        DatabaseScoreDao scoreDao = new DatabaseScoreDao();
+        scoreService = new ScoreService(scoreDao);
+        
     }
     
     @Override
@@ -133,7 +146,11 @@ public class BlokkiUi extends Application{
                 } else if ( event.getCode() == KeyCode.LEFT) {
                     logic.moveTiles("left");
                 }
-                if ( logic.isGameOver() ) {
+                if ( logic.isGameWon() ) {
+                    winScene = createWinScene();
+                    sceneChange(winScene);
+                    
+                } else if ( logic.isGameOver() ) {
                     Alert alert = new Alert(AlertType.CONFIRMATION);
                     alert.setTitle("Game Over");
                     alert.setHeaderText(null);
@@ -162,6 +179,89 @@ public class BlokkiUi extends Application{
         newMainScene.addEventHandler(KeyEvent.KEY_PRESSED, tileMover);
         
         return newMainScene;
+    }
+    
+    public Scene createWinScene() {
+        VBox winPane = new VBox(10);
+        HBox namePane = new HBox(10);
+        winPane.setPadding(new Insets(10));
+        Label nameLabel = new Label("Enter your name");
+        TextField nameInput = new TextField();
+        
+        namePane.getChildren().addAll(nameLabel, nameInput);
+        Label winMessage = new Label();
+        winMessage.setText("Congratulations! You won the game.");
+        Label errorMessage = new Label();
+        
+        Button submitButton = new Button("Submit score");
+        submitButton.setOnAction(e->{
+            String name = nameInput.getText();
+            if ( name.length() > 0 && name.length() < 20 ){
+                if( scoreService.createScore(new Score(name, gridSize, logic.getScore())) ) { 
+                    errorMessage.setText("");
+                    this.scoreScene = createScoreScene();
+                    sceneChange(this.scoreScene);
+                    nameInput.setText("");
+                } else { 
+                    errorMessage.setText("adding of your score failed");
+                }
+
+                
+            } else {
+                errorMessage.setText("improper name length");
+                errorMessage.setTextFill(Color.RED);
+            }      
+        });  
+        
+
+        winPane.getChildren().addAll(winMessage, errorMessage, namePane, submitButton);       
+        
+        winScene = new Scene(winPane, 500, 500); 
+        return winScene;
+    }
+    
+    public Scene createScoreScene() {
+        VBox scorePane = new VBox(10);
+        scorePane.setPadding(new Insets(10));
+        Label scoreLabel = new Label("Highscores on a " + this.gridSize + "X" + this.gridSize + " grid.");
+        
+        ArrayList<Score> scoreList = scoreService.getScores(this.gridSize);
+
+        TableView scoreTable = new TableView();
+        scoreTable.setEditable(true);
+        TableColumn<String, Score> nameCol = new TableColumn<>("Name");
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        
+        TableColumn<Integer, Score> scoreCol = new TableColumn("Score");
+        scoreCol.setCellValueFactory(new PropertyValueFactory<>("score"));
+        
+        scoreTable.getColumns().addAll(nameCol, scoreCol);
+        
+        int x = 10;
+        if (scoreList.size() < 10) { 
+            x = scoreList.size();
+        }
+        for( int i = 0; i < x; i++ ) { 
+            scoreTable.getItems().add(scoreList.get(i));
+        }
+        
+        Button playButton = new Button("Play Again");
+        Button exitButton = new Button("Exit to Desktop");
+        HBox buttonPane = new HBox(10);
+        buttonPane.getChildren().addAll(playButton, exitButton);
+        playButton.setOnAction(e->{
+            start(stage);
+        });  
+        exitButton.setOnAction(e->{
+            Platform.exit();
+            System.exit(0);
+        }); 
+        scorePane.getChildren().addAll(scoreLabel, scoreTable, buttonPane);
+        
+        scoreScene = new Scene(scorePane, 500, 500);
+        return scoreScene;
+        
+        
     }
     
     public void updateGrid(GridPane grid) {

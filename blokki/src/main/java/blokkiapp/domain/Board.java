@@ -15,6 +15,7 @@ public class Board {
     public final int boardSize;
     public final int lowestNumber;
     public final int startingTiles;
+    private boolean gameWon;
     
     private Tile[][] grid;
     
@@ -25,6 +26,7 @@ public class Board {
         this.lowestNumber = lowestNumber;
         this.startingTiles = startingTiles;
         this.grid = new Tile[boardSize][boardSize];
+        this.gameWon = false;
     }
     
     public Board() {
@@ -53,6 +55,9 @@ public class Board {
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
                 Tile currentTile = grid[i][j];
+                if (currentTile.getValue() == 2048) { 
+                    this.gameWon = true;
+                }
                 if (currentTile.getValue() == 0) {
                     full = false;
                 }
@@ -74,7 +79,12 @@ public class Board {
             int randomX = random.nextInt(boardSize);
             int randomY = random.nextInt(boardSize);
             if (grid[randomX][randomY].getValue() == 0) {
-                int tmp = random.nextInt(2) + 1;
+                int tmp = random.nextInt(5) + 1;
+                if (tmp == 1) {
+                    tmp = 2;
+                } else { 
+                    tmp = 1;
+                }
                 grid[randomX][randomY].setValue(tmp * lowestNumber);
                 break;
             }
@@ -195,7 +205,9 @@ public class Board {
         this.grid = grid;
     }
     
-    
+    public boolean isGameWon() {
+        return this.gameWon;
+    }
 
 
     public Random getRandom() {
