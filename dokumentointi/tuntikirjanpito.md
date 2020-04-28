@@ -8,4 +8,6 @@
 | 7.4   | 5    | Board luokan ja pelilogiikan tekemistä, testien ja checkstylen lisäys sekä lisää dokumentointia|
 | 20.4  | 6    | graafisen käyttöliittymän aloittaminen|
 | 21.4  | 4    | viikon 5 vaatimuksia, alustava graafinen käyttöliittymä|
-| yht   | 27   | | 
+| 27.4  |  3   | dao mallin opettelua |
+| 28.4  |  8   | tietokantaominaisuuksien toteuttaminen, dokumentaation parantelu|
+| yht   | 38   | | 

@@ -5,11 +5,13 @@
 
 ## Dokumentaatio
 
-[Vaatimusmäärittely](https://github.com/glinoen/ot-harjoitustyo2020/blob/master/dokumentointi/vaatimusmaarittely.md)
+[Vaatimusmäärittely](dokumentointi/vaatimusmaarittely.md)
 
 [Arkkitehtuurikuvaus](dokumentointi/arkkitehtuuri.md)
 
 [Käyttöohje](dokumentointi/kaytto-ohje.md)
+
+[Tuntikirjanpito](dokumentointi/tuntikirjanpito.md)
 
 ## Projektin ajaminen
 
