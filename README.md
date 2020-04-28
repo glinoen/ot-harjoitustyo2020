@@ -9,6 +9,8 @@
 
 [Arkkitehtuurikuvaus](dokumentointi/arkkitehtuuri.md)
 
+[Käyttöohje](dokumentointi/kaytto-ohje.md)
+
 ## Projektin ajaminen
 
 kansiossa blokki, komennolla
