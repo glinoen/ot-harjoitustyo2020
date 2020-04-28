@@ -9,16 +9,21 @@ import blokkiapp.dao.ScoreDao;
 import java.util.ArrayList;
 
 /**
- *
- * @author julinden
+ * Class responsible for interacting with DAO
  */
 public class ScoreService {
     private ScoreDao scoreDao;
+    
     
     public ScoreService(ScoreDao scoreDao) {
         this.scoreDao = scoreDao;
     }
     
+    /**
+     * Method for adding a new score
+     * @param score the score being added
+     * @return true if successful
+     */
     public boolean createScore(Score score) {
         try {
             scoreDao.create(score);
@@ -28,6 +33,11 @@ public class ScoreService {
         return true;
     }
     
+    /**
+     * Method for getting a list of scores
+     * @param gridSize the grid size of preferred scores
+     * @return the list of scores for a grid size value
+     */
     public ArrayList<Score> getScores(int gridSize) {
         return scoreDao.getScoresForGrid(gridSize);
     }

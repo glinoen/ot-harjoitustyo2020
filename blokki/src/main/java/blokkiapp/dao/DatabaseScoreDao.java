@@ -15,8 +15,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
- *
- * @author julinden
+ * Database functionality of the program
  */
 public class DatabaseScoreDao implements ScoreDao {
     
@@ -25,11 +24,17 @@ public class DatabaseScoreDao implements ScoreDao {
     private Statement statement;
     private PreparedStatement pStatement;
     
+    /**
+     * Constructor
+     */
     public DatabaseScoreDao() {
         this.dbName = "scores";
         initDb();
     }
     
+    /**
+     * Method for initializing the database
+     */
     public void initDb() {
         try {
             startDbConnection();
@@ -40,6 +45,9 @@ public class DatabaseScoreDao implements ScoreDao {
         }
     }
     
+    /**
+     * Method which tries to make a connection to the database
+     */
     public void startDbConnection() {
         try {
             connection = DriverManager.getConnection("jdbc:sqlite:scores");
@@ -49,6 +57,9 @@ public class DatabaseScoreDao implements ScoreDao {
         }
     }
     
+    /**
+     * Method which tries to close the connection to the database
+     */
     public void closeDbConnection() {
         try {
             statement.close();
@@ -58,6 +69,13 @@ public class DatabaseScoreDao implements ScoreDao {
         }
     }
     
+    /**
+     * Method which stores a score to the database
+     * 
+     * @param score The score which is saved to the database
+     * 
+     * @return true if everything was successful
+     */
     @Override
     public Boolean create(Score score) {
         try {
@@ -75,6 +93,13 @@ public class DatabaseScoreDao implements ScoreDao {
         }
     }
     
+    /**
+     * Method which gets a list of scores from the database
+     * 
+     * @param gridSize Returns scores for this grid size.
+     * 
+     * @return a list of scores
+     */
     @Override
     public ArrayList<Score> getScoresForGrid(int gridSize) {
         try {

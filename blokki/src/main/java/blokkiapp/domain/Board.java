@@ -11,6 +11,9 @@ package blokkiapp.domain;
  */
 import java.util.*;
 
+/**
+ * Functionality of the grid
+ */
 public class Board {
     public final int boardSize;
     public final int lowestNumber;
@@ -21,6 +24,12 @@ public class Board {
     
     private Random random = new Random();
     
+    /**
+     * Constructor, sets the settings of the game
+     * @param boardSize the size of the grid
+     * @param lowestNumber the starting value
+     * @param startingTiles the amount of tiles in the beginning
+     */
     public Board(int boardSize, int lowestNumber, int startingTiles) {
         this.boardSize = boardSize;
         this.lowestNumber = lowestNumber;
@@ -41,14 +50,21 @@ public class Board {
         this(boardSize, lowestNumber, 2);
     }
     
+    /**
+     * Method for initializing the grid or clearing the grid
+     */
     public void gridInit() {
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
-                grid[i][j] = new Tile(i, j);
+                grid[i][j] = new Tile();
             }
         }
     }
     
+    /**
+     * Method which counts score after a move, and resets the merge value of moved tiles
+     * @return the score of the turn or -1 if the board is full
+     */
     public int gridCountScoreAndResetMerge() {
         boolean full = true;
         int score = 0;
@@ -74,6 +90,9 @@ public class Board {
         }
     }
     
+    /**
+     * Method for adding a random tile to the grid
+     */
     public void addRandomTile() {
         while (true) {
             int randomX = random.nextInt(boardSize);
@@ -91,6 +110,12 @@ public class Board {
         }
     }
     
+    /**
+     * Moves or merges tiles depending on the situation
+     * @param s tells the method if it should move or merge
+     * @param tile another of the tiles being compared
+     * @param comparedTile another of the tiles being compared
+     */
     public void tileMoverOrMerger(int s, Tile tile, Tile comparedTile) {
         if (s % 2 != 0 && comparedTile.getValue() == 0) {
             comparedTile.setValue(tile.getValue());
@@ -102,6 +127,9 @@ public class Board {
         }
     }
     
+    /**
+     * Method for moving the tiles down
+     */
     public void moveDown() {
         for (int s = 1; s < 4; s++) {
             for (int b = boardSize - 2; b >= 0; b--) {
@@ -121,7 +149,9 @@ public class Board {
             }
         } 
     }
-
+    /**
+     * Method for moving the tiles right
+     */
     public void moveRight() {
         for (int s = 1; s < 4; s++) {
             for (int b = boardSize - 2; b >= 0; b--) {
@@ -142,6 +172,9 @@ public class Board {
         } 
     }
     
+    /**
+     * Method for moving the tiles up
+     */
     public void moveUp() {
         for (int s = 1; s < 4; s++) {
             for (int b = 1; b < boardSize; b++) {
@@ -162,6 +195,9 @@ public class Board {
         }    
     }
     
+    /**
+     * Method for moving the tiles left
+     */
     public void moveLeft() {
         for (int s = 1; s < 4; s++) {
             for (int b = 1; b < boardSize; b++) {
@@ -182,41 +218,21 @@ public class Board {
         }    
     }
     
-
-
-    public  void printGrid() {
-        Arrays.stream(grid)
-            .forEach(
-                (row) -> {
-                    System.out.print("[");
-                    Arrays.stream(row)
-                        .forEach((tile) -> System.out.print(" " + tile.getValue() + " "));
-                    System.out.println("]");
-                }
-            );
-        System.out.println("");
-    }
-
+    /**
+     * Method for getting the 2D grid
+     * @return the grid containing the current state of the game
+     */
     public Tile[][] getGrid() {
         return grid;
     }
-
-    public void setGrid(Tile[][] grid) {
-        this.grid = grid;
-    }
     
+    /**
+     * Method which tells if the game has been won
+     * @return true if game is won
+     */
     public boolean isGameWon() {
         return this.gameWon;
     }
 
-
-    public Random getRandom() {
-        return random;
-    }
-
-    public void setRandom(Random random) {
-        this.random = random;
-    }
-    
     
 }

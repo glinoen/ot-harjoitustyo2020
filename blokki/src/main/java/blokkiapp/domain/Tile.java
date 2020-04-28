@@ -6,18 +6,13 @@
 package blokkiapp.domain;
 
 /**
- *
- * @author julinden
+ * Class which represents one tile in the grid
  */
 public class Tile {
     private int value;
-    private int locationX;
-    private int locationY;
     private boolean merged;
     
-    public Tile(int locationX, int locationY) {
-        this.locationX = locationX;
-        this.locationY = locationY;
+    public Tile() {
         this.value = 0;
         this.merged = false;
     }
@@ -28,22 +23,6 @@ public class Tile {
 
     public void setValue(int value) {
         this.value = value;
-    }
-
-    public int getLocationX() {
-        return locationX;
-    }
-
-    public void setLocationX(int locationX) {
-        this.locationX = locationX;
-    }
-
-    public int getLocationY() {
-        return locationY;
-    }
-
-    public void setLocationY(int locationY) {
-        this.locationY = locationY;
     }
 
     public boolean isMerged() {

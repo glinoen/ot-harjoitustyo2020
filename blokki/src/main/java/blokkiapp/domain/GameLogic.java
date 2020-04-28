@@ -6,8 +6,7 @@
 package blokkiapp.domain;
 
 /**
- *
- * @author julinden
+ * Methods for controlling the flow of the game
  */
 public class GameLogic {
     private int score;
@@ -18,19 +17,26 @@ public class GameLogic {
     public GameLogic() {
         
     }
-
+    /**
+     * Tells if the game is over
+     * @return true if game is over
+     */
     public boolean isGameOver() {
         return gameOver;
     }
-
-    public void setGameOver(boolean gameOver) {
-        this.gameOver = gameOver;
-    }
     
+    /**
+     * Tells if the game is won
+     * @return true if the game is won
+     */
     public boolean isGameWon() {
         return gameWon;
     }
     
+    /**
+     * Method for setting up a new game according to the rules
+     * @param size the size of the game grid
+     */
     public void newGame(int size) {
         this.board = new Board(size);
         this.gameOver = false;
@@ -41,6 +47,10 @@ public class GameLogic {
         board.addRandomTile();
     }
     
+    /**
+     * Method for executing a move the impact of the move
+     * @param direction which direction the tiles are moved
+     */
     public void moveTiles(String direction) {
         if (direction.equals("down")) {
             board.moveDown();
@@ -63,21 +73,21 @@ public class GameLogic {
             }
         }
     }
-
+    
+    /**
+     * Method for getting the current score
+     * @return the current score
+     */
     public int getScore() {
         return score;
     }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
+    
+    /**
+     * Method for getting the board, so one can get access to grid info
+     * @return the board which contains the grid
+     */
     public Board getBoard() {
         return board;
     }
 
-    public void setBoard(Board board) {
-        this.board = board;
-    }
-    
 }
