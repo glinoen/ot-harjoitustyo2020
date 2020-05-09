@@ -47,5 +47,42 @@ public class GameLogicTest {
         logic.moveTiles("down");
         assertEquals(8, grid[2][3].getValue() + grid[3][3].getValue());
     }
+    
+    
+    @Test
+    public void movingTilesUpWorks() {
+        logic.newGame(4);
+        Tile[][] grid = logic.getBoard().getGrid();
+        grid[0][3].setValue(2);
+        grid[1][3].setValue(2);
+        grid[2][3].setValue(2);
+        grid[3][3].setValue(2);
+        logic.moveTiles("up");
+        assertEquals(8, grid[0][3].getValue() + grid[1][3].getValue());
+    }
+    
+    @Test
+    public void movingTilesRightWorks() {
+        logic.newGame(4);
+        Tile[][] grid = logic.getBoard().getGrid();
+        grid[0][0].setValue(2);
+        grid[0][1].setValue(2);
+        grid[0][2].setValue(2);
+        grid[0][3].setValue(2);
+        logic.moveTiles("right");
+        assertEquals(8, grid[0][2].getValue() + grid[0][3].getValue());
+    }
+    
+    @Test
+    public void movingTilesLeftWorks() {
+        logic.newGame(4);
+        Tile[][] grid = logic.getBoard().getGrid();
+        grid[0][0].setValue(2);
+        grid[0][1].setValue(2);
+        grid[0][2].setValue(2);
+        grid[0][3].setValue(2);
+        logic.moveTiles("left");
+        assertEquals(8, grid[0][0].getValue() + grid[0][1].getValue());
+    }
 
 }

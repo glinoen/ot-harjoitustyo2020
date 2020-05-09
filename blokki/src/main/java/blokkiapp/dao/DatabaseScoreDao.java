@@ -27,8 +27,8 @@ public class DatabaseScoreDao implements ScoreDao {
     /**
      * Constructor
      */
-    public DatabaseScoreDao() {
-        this.dbName = "scores";
+    public DatabaseScoreDao(String name) {
+        this.dbName = name;
         initDb();
     }
     
@@ -50,7 +50,7 @@ public class DatabaseScoreDao implements ScoreDao {
      */
     public void startDbConnection() {
         try {
-            connection = DriverManager.getConnection("jdbc:sqlite:scores");
+            connection = DriverManager.getConnection("jdbc:sqlite:" + this.dbName);
             statement = connection.createStatement();
         } catch (SQLException e) {
             
@@ -118,8 +118,20 @@ public class DatabaseScoreDao implements ScoreDao {
             return scoreList;
         
         } catch (SQLException e) {
-            System.out.println(e);
             return null;
         }
+    }
+    
+    @Override
+    public void clear() {
+        try { 
+            startDbConnection();
+            statement.execute("DROP TABLE IF EXISTS Scores;");
+            closeDbConnection();
+            initDb();
+        } catch (SQLException e) { 
+            
+        }
+        
     }
 }

@@ -16,5 +16,5 @@ public interface ScoreDao {
     
     Boolean create(Score score) throws Exception;
     ArrayList<Score> getScoresForGrid(int gridSize);
-    
+    void clear();
 }

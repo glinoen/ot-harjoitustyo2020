@@ -57,7 +57,7 @@ public class BlokkiUi extends Application{
     @Override
     public void init() throws Exception { 
         logic = new GameLogic();
-        DatabaseScoreDao scoreDao = new DatabaseScoreDao();
+        DatabaseScoreDao scoreDao = new DatabaseScoreDao("scores.db");
         scoreService = new ScoreService(scoreDao);
         
     }
@@ -87,21 +87,27 @@ public class BlokkiUi extends Application{
         Label errorMessage = new Label();
         
         Button startButton = new Button("Start Game");
-        startButton.setOnAction(e->{
-            int tempGridSize = Integer.parseInt(gridSizeInput.getText());
+        startButton.setOnAction(e -> { 
+            try { 
+                int tempGridSize = Integer.parseInt(gridSizeInput.getText());
             
-            if ( tempGridSize > 3 && tempGridSize < 11 ){
-                this.gridSize = tempGridSize;
-                logic.newGame(gridSize);
-                
-                errorMessage.setText("");
-                this.mainScene = createMainScene();
-                sceneChange(this.mainScene);
-                gridSizeInput.setText("");
-            } else {
-                errorMessage.setText("improper grid size");
+                if ( tempGridSize > 3 && tempGridSize < 11 ){
+                    this.gridSize = tempGridSize;
+                    logic.newGame(gridSize);
+
+                    errorMessage.setText("");
+                    this.mainScene = createMainScene();
+                    sceneChange(this.mainScene);
+                    gridSizeInput.setText("");
+                } else {
+                    errorMessage.setText("improper grid size");
+                    errorMessage.setTextFill(Color.RED);
+                } 
+            } catch (NumberFormatException z) { 
+                errorMessage.setText("type a number, not text");
                 errorMessage.setTextFill(Color.RED);
-            }      
+            }
+                 
         });  
         
 
