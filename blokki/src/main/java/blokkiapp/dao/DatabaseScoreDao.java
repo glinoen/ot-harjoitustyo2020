@@ -110,7 +110,7 @@ public class DatabaseScoreDao implements ScoreDao {
             
             ArrayList<Score> scoreList = new ArrayList<>();
             
-            while(scores.next()) {
+            while (scores.next()) { 
                 scoreList.add(new Score(scores.getString("name"), scores.getInt("gridsize"), scores.getInt("score")));
             }
             pStatement.close();

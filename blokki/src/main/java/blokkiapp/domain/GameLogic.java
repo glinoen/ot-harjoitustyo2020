@@ -48,7 +48,7 @@ public class GameLogic {
     }
     
     /**
-     * Method for executing a move the impact of the move
+     * Method for executing a move
      * @param direction which direction the tiles are moved
      */
     public void moveTiles(String direction) {
@@ -61,12 +61,19 @@ public class GameLogic {
         } else if (direction.equals("up")) {
             board.moveUp();
         }
+        boardStatus();
+    }
+    
+    /**
+     * Method which checks the status of the board after a move
+     */
+    public void boardStatus() { 
         int roundScore = board.gridCountScoreAndResetMerge();
         if (roundScore == -1) { 
             this.gameOver = true;
         } else { 
             this.score += roundScore;
-            if (board.isGameWon() ) {
+            if (board.isGameWon()) {
                 this.gameWon = true;
             } else { 
                 board.addRandomTile();

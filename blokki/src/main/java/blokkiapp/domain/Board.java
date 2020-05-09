@@ -19,6 +19,7 @@ public class Board {
     public final int lowestNumber;
     public final int startingTiles;
     private boolean gameWon;
+    private boolean boardFull;
     
     private Tile[][] grid;
     
@@ -36,6 +37,7 @@ public class Board {
         this.startingTiles = startingTiles;
         this.grid = new Tile[boardSize][boardSize];
         this.gameWon = false;
+        this.boardFull = false;
     }
     
     public Board() {
@@ -66,28 +68,37 @@ public class Board {
      * @return the score of the turn or -1 if the board is full
      */
     public int gridCountScoreAndResetMerge() {
-        boolean full = true;
+        this.boardFull = true;
         int score = 0;
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
-                Tile currentTile = grid[i][j];
-                if (currentTile.getValue() == 2048) { 
-                    this.gameWon = true;
-                }
-                if (currentTile.getValue() == 0) {
-                    full = false;
-                }
-                if (currentTile.isMerged()) {
-                    score += currentTile.getValue();
-                    currentTile.setMerged(false);
-                }
+                score += scoreCounterWithMergeReset(grid[i][j]);
             }
         }
-        if (full) { 
+        if (this.boardFull) { 
             return -1;
         } else { 
             return score;
         }
+    }
+    
+    /**
+     * Method which checks the score of a tile and checks if the game is won
+     * @return the score of the tile under inspection
+     */
+    public int scoreCounterWithMergeReset(Tile currentTile) { 
+        int tileScore = 0;
+        if (currentTile.getValue() == 2048) { 
+            this.gameWon = true;
+        }
+        if (currentTile.getValue() == 0) {
+            this.boardFull = false;
+        }
+        if (currentTile.isMerged()) {
+            tileScore = currentTile.getValue();
+            currentTile.setMerged(false);
+        }
+        return tileScore;
     }
     
     /**

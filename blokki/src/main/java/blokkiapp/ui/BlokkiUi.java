@@ -69,11 +69,7 @@ public class BlokkiUi extends Application{
         stage.setTitle("Blokki");
         stage.setScene(this.gameSetupScene);
         stage.show();
-        
-        // setup primary stage
-//        primaryStage.setTitle("Blokki");
-//        primaryStage.setScene(gameSetupScene);
-//        primaryStage.show();
+
     }
     
     public Scene createGameSetupScene() {
@@ -163,13 +159,17 @@ public class BlokkiUi extends Application{
                     alert.setContentText("Game over. Your score: " + logic.getScore());
                     ButtonType buttonTypeOne = new ButtonType("Play again");
                     ButtonType buttonTypeTwo = new ButtonType("Quit to desktop");
+                    ButtonType buttonTypeScores = new ButtonType("Look at highscores");
                     ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
 
-                    alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeCancel);
+                    alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeScores, buttonTypeCancel);
                     alert.getDialogPane().lookupButton(buttonTypeCancel).setVisible(false);
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == buttonTypeOne){
                         start(stage);
+                    } else if (result.get() == buttonTypeScores) { 
+                        scoreScene = createScoreScene();
+                        sceneChange(scoreScene);
                     } else {
                         Platform.exit();
                         System.exit(0);
