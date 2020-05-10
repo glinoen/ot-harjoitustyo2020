@@ -1,4 +1,4 @@
-## Ohjelmistotekniikka harjoitustyö 2020
+# Ohjelmistotekniikka harjoitustyö 2020
 
 2048 pelin hengessä tehty peli.
 
@@ -10,6 +10,8 @@
 [Arkkitehtuurikuvaus](dokumentointi/arkkitehtuuri.md)
 
 [Käyttöohje](dokumentointi/kaytto-ohje.md)
+
+[Testausdokumentti](dokumentointi/testausdokumentti.md)
 
 [Tuntikirjanpito](dokumentointi/tuntikirjanpito.md)
 

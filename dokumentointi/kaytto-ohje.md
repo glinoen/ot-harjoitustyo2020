@@ -1,13 +1,13 @@
 # Käyttöohje
 
-Lataa tiedosto [blokki6.jar](https://github.com/glinoen/ot-harjoitustyo2020/releases/download/viikko6/blokki6.jar)
+Lataa tiedosto [blokkiloppupalautus.jar](https://github.com/glinoen/ot-harjoitustyo2020/releases/download/3/blokkiloppupalautus.jar)
 
 ## Ohjelman käynnistäminen
 
 Ohjelma käynnistetään komennolla 
 
 ```
-java -jar blokki6.jar
+java -jar blokkiloppupalautus.jar
 ```
 
 ## Uuden pelin aloittaminen
@@ -16,7 +16,7 @@ Sovellus käynnistyy aloitusnäkymään, missä syötekenttään kirjoitetaan ha
 
 ## Pelin pelaaminen
 
-Ruudukossa olevia ruutuja voidaan liikuttaa nuolinäppäimillä eri suuntiin, samanarvoiset ruudut yhdistyvät ollessaan vierekkäin.
+Ruudukossa olevia ruutuja voidaan liikuttaa nuolinäppäimillä eri suuntiin, samanarvoiset ruudut yhdistyvät kun niiden välissä ei ole muita ruutuja ja niitä liikutetaan siten että ne menevät ikään kuin päällekkäin.
 
 ## Pelin häviäminen
 
