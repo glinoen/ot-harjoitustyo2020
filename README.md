@@ -13,15 +13,27 @@
 
 [Tuntikirjanpito](dokumentointi/tuntikirjanpito.md)
 
-## Projektin ajaminen
+## Komentorivi (komennot suoritetaan kansiossa blokki)
 
-kansiossa blokki, komennolla
+### Projektin ajaminen
+
+komennolla
 
 ```
 mvn compile exec:java -Dexec.mainClass=blokkiapp.Main
 ```
 
-## Testaus
+tai luomalla jar-tiedosto
+```
+mvn package
+```
+ja avaamalla se kansiossa blokki/target/
+```
+java -jar blokki-1.0-SNAPSHOT.jar
+```
+
+
+### Testaus
 
 Testit suoritetaan komennolla
 
@@ -33,4 +45,9 @@ Testikattavuusraportti luodaan komennolla
 
 ```
 mvn jacoco:report
+```
+
+Checkstyle raportti luodaan komennolla
+```
+mvn jxr:jxr checkstyle:checkstyle
 ```

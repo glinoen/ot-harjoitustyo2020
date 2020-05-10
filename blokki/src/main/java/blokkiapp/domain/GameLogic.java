@@ -6,7 +6,7 @@
 package blokkiapp.domain;
 
 /**
- * Methods for controlling the flow of the game
+ * Class that controls the gameplay
  */
 public class GameLogic {
     private int score;

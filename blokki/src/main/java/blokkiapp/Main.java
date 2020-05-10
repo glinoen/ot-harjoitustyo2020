@@ -7,7 +7,6 @@ package blokkiapp;
 
 import blokkiapp.domain.Board;
 import blokkiapp.domain.GameLogic;
-import blokkiapp.ui.TextUi;
 import blokkiapp.ui.BlokkiUi;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -19,8 +18,5 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         BlokkiUi.main(args);
-//        Scanner reader = new Scanner(System.in);
-//        TextUi textUi = new TextUi(reader);
-//        textUi.start();
     }
 }

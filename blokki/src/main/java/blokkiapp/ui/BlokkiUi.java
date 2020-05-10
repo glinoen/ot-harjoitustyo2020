@@ -40,8 +40,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 /**
- *
- * @author julinden 
+ * Class that contains the graphical user interface
+ * 
  */
 public class BlokkiUi extends Application{
     private GameLogic logic;
@@ -171,8 +171,7 @@ public class BlokkiUi extends Application{
                         scoreScene = createScoreScene();
                         sceneChange(scoreScene);
                     } else {
-                        Platform.exit();
-                        System.exit(0);
+                        stop();
                     }
                 } else {
                     updateGrid(tileGrid);
@@ -210,6 +209,7 @@ public class BlokkiUi extends Application{
                     nameInput.setText("");
                 } else { 
                     errorMessage.setText("adding of your score failed");
+                    errorMessage.setTextFill(Color.RED);
                 }
 
                 
@@ -229,10 +229,15 @@ public class BlokkiUi extends Application{
     public Scene createScoreScene() {
         VBox scorePane = new VBox(10);
         scorePane.setPadding(new Insets(10));
+        Label errorMessage = new Label();
         Label scoreLabel = new Label("Highscores on a " + this.gridSize + "X" + this.gridSize + " grid.");
         
         ArrayList<Score> scoreList = scoreService.getScores(this.gridSize);
-
+        if (scoreList == null) {
+            errorMessage.setText("loading scores from the database failed");
+            errorMessage.setTextFill(Color.RED);
+        } 
+        
         TableView scoreTable = new TableView();
         scoreTable.setEditable(true);
         TableColumn<String, Score> nameCol = new TableColumn<>("Name");
@@ -243,26 +248,28 @@ public class BlokkiUi extends Application{
         
         scoreTable.getColumns().addAll(nameCol, scoreCol);
         
-        int x = 10;
-        if (scoreList.size() < 10) { 
-            x = scoreList.size();
+        if (scoreList != null) { 
+            int x = 10;
+            if (scoreList.size() < 10) { 
+                x = scoreList.size();
+            }
+            for( int i = 0; i < x; i++ ) { 
+                scoreTable.getItems().add(scoreList.get(i));
+            }
         }
-        for( int i = 0; i < x; i++ ) { 
-            scoreTable.getItems().add(scoreList.get(i));
-        }
+        
         
         Button playButton = new Button("Play Again");
         Button exitButton = new Button("Exit to Desktop");
         HBox buttonPane = new HBox(10);
         buttonPane.getChildren().addAll(playButton, exitButton);
-        playButton.setOnAction(e->{
+        playButton.setOnAction(e -> {
             start(stage);
         });  
-        exitButton.setOnAction(e->{
-            Platform.exit();
-            System.exit(0);
+        exitButton.setOnAction(e -> {
+            stop();
         }); 
-        scorePane.getChildren().addAll(scoreLabel, scoreTable, buttonPane);
+        scorePane.getChildren().addAll(errorMessage, scoreLabel, scoreTable, buttonPane);
         
         scoreScene = new Scene(scorePane, 500, 500);
         return scoreScene;
@@ -292,8 +299,8 @@ public class BlokkiUi extends Application{
   
     @Override
     public void stop() {
-      // tee lopetustoimenpiteet täällä
-      System.out.println("sovellus sulkeutuu");
+        Platform.exit();
+        System.exit(0);
     }    
     
     public static void main(String[] args) {

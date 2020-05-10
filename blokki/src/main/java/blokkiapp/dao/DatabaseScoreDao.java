@@ -122,6 +122,9 @@ public class DatabaseScoreDao implements ScoreDao {
         }
     }
     
+    /**
+     * Method which removes all data from database
+     */
     @Override
     public void clear() {
         try { 
