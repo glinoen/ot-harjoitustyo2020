@@ -8,6 +8,7 @@ package blokkiapp.domain;
 import org.junit.Before;
 import org.junit.Test;
 import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  *
@@ -34,6 +35,31 @@ public class GameLogicTest {
             }
         }
         assertEquals(2, gridvalue);
+    }
+    
+    @Test
+    public void gameCanBeWon() {
+        logic.newGame(4);
+        Tile[][] grid = logic.getBoard().getGrid();
+        grid[0][3].setValue(1024);
+        grid[1][3].setValue(1024);
+        logic.moveTiles("down");
+        assertTrue(logic.isGameWon());
+    }
+    
+    @Test
+    public void gameIsLostWhenBoardIsFull() {
+        logic.newGame(4);
+        int gridvalue = 1;
+        Tile[][] grid = logic.getBoard().getGrid();
+        for (int i = 0; i < logic.getBoard().boardSize; i++) { 
+            for (int j = 0; j < logic.getBoard().boardSize; j++) { 
+                grid[i][j].setValue(gridvalue);
+                gridvalue++;
+            }
+        }
+        logic.moveTiles("up");
+        assertTrue(logic.isGameOver());
     }
     
     @Test
