@@ -20,7 +20,7 @@ Ruudukossa olevia ruutuja voidaan liikuttaa nuolinäppäimillä eri suuntiin, sa
 
 ## Pelin häviäminen
 
-Jos ruudukkoon ei enää mahdu uusia ruutuja peli on hävitty, ja avautuneesta ikkunasta voidaan aloittaa uusi peli painamalla _Play Again_ tai poistua sovelluksesta painamalla _Exit to Desktop_.
+Jos ruudukkoon ei enää mahdu uusia ruutuja peli on hävitty, ja avautuneesta ikkunasta voidaan aloittaa uusi peli painamalla _Play Again_ , poistua sovelluksesta painamalla _Exit to Desktop_ tai mennä katsomaan parhaita tuloksia painamalla _View High Scores_.
 
 ## Pelin voittaminen
 

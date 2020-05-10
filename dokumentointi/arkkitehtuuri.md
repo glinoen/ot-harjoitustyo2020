@@ -1,5 +1,9 @@
 # Arkkitehtuurikuvaus
 
+## Rakenne
+Ohjelman pakkausrakenne on seuraavanlainen:
+![alt text](/dokumentointi/kuvat/blokkipakkausrakenne.png)
+
 ## Käyttöliittymä
 
 Käyttöliittymä sisältää neljä erillistä näkymää

@@ -157,9 +157,9 @@ public class BlokkiUi extends Application{
                     alert.setTitle("Game Over");
                     alert.setHeaderText(null);
                     alert.setContentText("Game over. Your score: " + logic.getScore());
-                    ButtonType buttonTypeOne = new ButtonType("Play again");
-                    ButtonType buttonTypeTwo = new ButtonType("Quit to desktop");
-                    ButtonType buttonTypeScores = new ButtonType("Look at highscores");
+                    ButtonType buttonTypeOne = new ButtonType("Play Again");
+                    ButtonType buttonTypeTwo = new ButtonType("Exit to Desktop");
+                    ButtonType buttonTypeScores = new ButtonType("View High Scores");
                     ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
 
                     alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeScores, buttonTypeCancel);
