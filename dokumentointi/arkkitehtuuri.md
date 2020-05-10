@@ -39,10 +39,18 @@ Luokka _DatabaseScoreDao_ pakkauksessa _blokkiapp.dao_ huolehtii tietojen tallen
 
 Jokainen pelin voittanut tulos tallennetaan tietokantaan joka on toteutettu _SQLitellä_
 
-### Toiminnallisuudet
+## Toiminnallisuudet
 
 #### ruutujen liikuttaminen
 
 Kun käyttäjä pelaa peliä ja painaa nuolinäppäintä ylös tapahtuu seuraavaa:
 
 ![alt text](/dokumentointi/kuvat/sekvenssitile.png)
+
+Tapahtumankäsittelijä joka reagoi näppäimistön painalluksiin kutsuu sovelluslogiikan luokan _GameLogic_ metodia moveTiles, antaen sille parametriksi suunnan. Tämä metodi kutsuu sovelluslogiikan luokan _Board_ metodia moveUp joka käy ruudukon väli vertaillen ruutuja saman luokan metodilla tileMoverOrMerger, jolle parametriksi annetaan vertailtavat ruudut ja algoritmin vaihe _s_. Sitten _GameLogic_ kutsuu omaa metodiaan boardStatus joka tarkastaa ruudukon tilanteen kutsumalla luokan _Board_ metodia gridCountScoreAndResetMerge. Tämän metodin palauttaman arvon perusteella tiedetään onko peli hävitty, jos ei niin lisätään metodin palauttama arvo kokonaispisteisiin pisteet ja tarkastetaan onko peli voitettu kutsumalla _Board_ luokan metodia isGameWon().
+
+## Ohjelman heikkoudet
+
+- Koko käyttöliittymä on toteutettu yhdessä luokassa.
+
+- Ohjelman hidastuminen ruudukon kasvaessa. Tarvitaan optimointia. 
