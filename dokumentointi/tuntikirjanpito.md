@@ -10,4 +10,7 @@
 | 21.4  | 4    | viikon 5 vaatimuksia, alustava graafinen käyttöliittymä|
 | 27.4  |  3   | dao mallin opettelua |
 | 28.4  |  8   | tietokantaominaisuuksien toteuttaminen, dokumentaation parantelu|
-| yht   | 38   | | 
+| 8.5   |  2   | tietokannan testaus |
+| 9.5   |  6   | tietokannan testaus loppuun & dokumentaatio |
+| 10.5   |  7   | dokumentaation hiomista, javadoccia ja pari testiä |
+| yht   | 54   | | 

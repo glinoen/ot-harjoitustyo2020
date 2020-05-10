@@ -28,9 +28,9 @@ Sovelluksessa on aloitusnäkymä missä valitaan pelin asetukset. Toinen näkym�
 
 - käyttäjä voi pelata peliä
 
-- voittaessaan pelin käyttäjä voi tallentaa tuloksen tietokantaan 
+- voittaessaan pelin käyttäjä voi tallentaa tuloksen tietokantaan valitsemallaan nimellä ja sen jälkeen aloittaa uuden pelin 
 
-- hävitessään pein käyttäjä voi aloittaa uuden pelin tai mennä katsomaan tuloksia tietokannasta
+- hävitessään pelin käyttäjä voi aloittaa uuden pelin tai mennä katsomaan tuloksia tietokannasta
 
 ## Jatkokehitysideoita
 
